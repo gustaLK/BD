@@ -2,7 +2,7 @@ create table Filiais(
     codigo char(1) not null,
     nome varchar2(100) not null,
     telefone varchar2(10) not null,
-    constraint pk_codigo primary key (codigo)
+    constraint pk_filiais primary key (codigo)
     );
 
 create table Clientes(
@@ -10,60 +10,42 @@ create table Clientes(
     nome varchar2(100)not null,
     sexo char(1) not null,
     limite varchar2(100) not null,
-    filial char(1) not null,
-    constraint pk_id primary key (id),
+    filial char(1),
+    constraint pk_clientes primary key (id),
     constraint fk_filiais_clientes foreign key (filial) references Filiais (codigo)
     );
-    
-alter table Filiais
-    modify nome varchar2(100);
-    
-insert into Filiais values ('A','Centro','3332-2020');
-insert into Filiais values ('B','Shopping','3333-1010');
-insert into Filiais values ('C','Votorantim','3243-1515');
-insert into Filiais values ('D','Itu','9321-8345');
 
-insert into Clientes values ('5','JO√O','F','R$500,00','A');
-insert into Clientes values ('28','MARIA','F','R$300,00','C');
-insert into Clientes values ('4','PEDRO','M','R$500,00','A');
-insert into Clientes values ('32','PAULO','M','R$800,00','A');
-insert into Clientes values ('16','ANA','F','R$900,00','C');
-insert into Clientes values ('15','JOS…','M','R$500,00','B');
-insert into Clientes values ('22','ANTONIO','M','R$500,00','');
-insert into Clientes values ('19','CL¡DIA','F','R$900,00','B');
+insert into Filiais values ('A','Centro','33322020');
+insert into Filiais values ('B','Shopping','33331010');
+insert into Filiais values ('C','Votorantim','32431515');
+insert into Filiais values ('D','Itu','93218345');
+
+insert into Clientes values ('5','JO√ÉO','F','500.00','A');
+insert into Clientes values ('28','MARIA','F','300.00','C');
+insert into Clientes values ('4','PEDRO','M','500.00','A');
+insert into Clientes values ('32','PAULO','M','800.00','A');
+insert into Clientes values ('16','ANA','F','900.00','C');
+insert into Clientes values ('15','JOS√â','M','500.00','B');
+insert into Clientes values ('22','ANTONIO','M','500.00','');
+insert into Clientes values ('19','CL√ÅDIA','F','900.00','B');
 
 select * from Filiais;
 
 select * from Clientes;
 
-alter table Clientes
-    modify (filial null);
+delete from clientes
+      where id = 16;
 
-delete from Clientes
-    where id = 16;
-    
-update Clientes
-    set filial = 'B';
-    
-delete from Filiais
-    where codigo = 'C';
-    
-insert into Filiais values ('E','Salto','8343-9483');
+update clientes 
+      set filial = B
+      where id = 28;
 
-insert into Clientes values ('25','Roberta','F','R$800,00','E');
+delete from filiais
+      where codigo = 'C';
 
-update Clientes
-    set filial = 'E'
-    where id = 25;
-    
-update Clientes
-    set limite = 'R$1000,00'
-    where id = 19;
+insert into filiais values ('E', 'salto', '83439483');
+insert into clientes values (25, 'Roberta', 'F',  '800.00', 'E');
 
-
-
-        
-
-
-
-
+update clientes
+      set limite = +100
+      where sexo = F;
